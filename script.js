@@ -74,59 +74,69 @@ let scor = document.getElementById("score")
 let timer = document.getElementById("timer")
 let krots = []
 let size = 4
-let speed = 200
+let speed = 1000
 let score = 0
 let Timeleft = 60
 let w = 100,
     h = 100,
     margins = 30
-    
-container.style.width = size * w + margins * (size + 1) + "px"
-container.style.height = size * h + margins * (size + 1) + "px"
-container.style.gap = margins + "px"
-for (let i = 0; i < size * size; i++) {
-    krots.push(new Krot(w, h))
-    container.appendChild(krots[krots.length - 1].createNode())
-}
+
 
 function getRandom(min, max) {
     return Math.random() * (max - min) + min;
 }
 const baseDespawnTime = 400
 let difValue = parseInt(difficulty.value)
-let maxDespawnTime = baseDespawnTime + difValue 
-let time = setInterval(() => {
-    let rand = Math.round(getRandom(0, size * size - 1))
-    let randTime = Math.round(getRandom(baseDespawnTime, maxDespawnTime))
-    if (!krots[rand].cooldown) {
-        krots[rand].setMode("A")
-        krots[rand].node.style.transform = "translateY(-10px)"
-
-        krots[rand].hide(randTime)
-    }
-}, speed);
-let endTimer
-timer.innerHTML = "Time left: "+ Timeleft
-document.title = "Time: "+ Timeleft
-function endTimerFunc(){
-    Timeleft--
-    timer.innerHTML = "Time left: "+ Timeleft
-    document.title = "Time: "+ Timeleft
-    if(Timeleft){
-        endTimer = setTimeout(endTimerFunc,1000)
-    }else{
-        container.remove()
-        timer.remove()
-        inputbox.remove()
-        clearInterval(time)
-        scor.innerHTML = "Totall score: "+ scor.innerHTML
-        setTimeout(()=>{
-            window.location.reload()
-        },5000)
-    }
-}
-endTimer = setTimeout(endTimerFunc,1000)
-difficulty.addEventListener("input", function () {
-    difValue = parseInt(difficulty.value) 
-    maxDespawnTime = baseDespawnTime + difValue 
+let maxDespawnTime = baseDespawnTime + difValue
+start.addEventListener("click", () => {
+    startGame()
 })
+
+function startGame() {
+    start.remove()
+    container.style.width = size * w + margins * (size + 1) + "px"
+    container.style.height = size * h + margins * (size + 1) + "px"
+    container.style.gap = margins + "px"
+    for (let i = 0; i < size * size; i++) {
+        krots.push(new Krot(w, h))
+        container.appendChild(krots[krots.length - 1].createNode())
+    }
+    let time = setInterval(() => {
+        let rand = Math.round(getRandom(0, size * size - 1))
+        let randTime = Math.round(getRandom(baseDespawnTime, maxDespawnTime))
+        if (!krots[rand].cooldown) {
+            krots[rand].setMode("A")
+            krots[rand].node.style.transform = "translateY(-10px)"
+            krots[rand].hitSound = new Audio("")
+            krots[rand].hitSound.src = "audio/mishka.mp3"
+            krots[rand].hitSound.play()
+            krots[rand].hide(randTime)
+        }
+    }, speed);
+    let endTimer
+    timer.innerHTML = "Time left: " + Timeleft
+    document.title = "Time: " + Timeleft
+
+    function endTimerFunc() {
+        Timeleft--
+        timer.innerHTML = "Time left: " + Timeleft
+        document.title = "Time: " + Timeleft
+        if (Timeleft) {
+            endTimer = setTimeout(endTimerFunc, 1000)
+        } else {
+            container.remove()
+            timer.remove()
+            inputbox.remove()
+            clearInterval(time)
+            scor.innerHTML = "Totall score: " + scor.innerHTML
+            setTimeout(() => {
+                window.location.reload()
+            }, 5000)
+        }
+    }
+    endTimer = setTimeout(endTimerFunc, 1000)
+    difficulty.addEventListener("input", function () {
+        difValue = parseInt(difficulty.value)
+        maxDespawnTime = baseDespawnTime + difValue
+    })
+}
