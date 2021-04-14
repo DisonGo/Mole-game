@@ -25,6 +25,7 @@ input{
     justify-content: space-around;
     flex-wrap: wrap;
     align-content: space-around;
+    cursor:  url('imgs/cursor1.png')64 64,auto;
 }
 
 body {
