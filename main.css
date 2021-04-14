@@ -1,0 +1,45 @@
+.centered {
+    margin: 10px auto;
+}
+
+#score {
+    width: 400px;
+    font-size: 60px;
+    text-align: center;
+}
+#inputbox{
+    width: 200px;
+}
+input{
+    width: 200px;
+}
+#timer {
+    width: 400px;
+    font-size: 60px;
+    text-align: center;
+}
+
+#cont {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+body {
+    margin: 0;
+    font-family: "BigNoodleTooOblique";
+}
+
+.krot {
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: .3s;
+}
+@font-face { 
+    font-family: 'BigNoodleTooOblique'; 
+    src: url('fonts/BigNoodleTooOblique.ttf')  format('truetype');
+    font-weight: normal; 
+    font-style: normal; 
+  }
