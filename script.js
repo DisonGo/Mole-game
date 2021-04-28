@@ -42,6 +42,10 @@ class Krot {
                     this.style.transform = "rotate(0)"
                 }, 1000)
             }
+            if(cl.mode == "W"){
+                score--
+                scor.innerHTML = score
+            }
         })
         return newKrot
     }
@@ -73,13 +77,13 @@ let container = document.getElementById("cont")
 let scor = document.getElementById("score")
 let timer = document.getElementById("timer")
 let krots = []
-let size = 4
-let speed = 1000
+let size = 5
+let speed = 200
 let score = 0
 let Timeleft = 60
-let w = 100,
-    h = 100,
-    margins = 30
+let w = 50,
+    h = 50,
+    margins = 5
 
 
 function getRandom(min, max) {
@@ -107,9 +111,9 @@ function startGame() {
         if (!krots[rand].cooldown) {
             krots[rand].setMode("A")
             krots[rand].node.style.transform = "translateY(-10px)"
-            krots[rand].hitSound = new Audio("")
-            krots[rand].hitSound.src = "audio/mishka.mp3"
-            krots[rand].hitSound.play()
+            // krots[rand].hitSound = new Audio("")
+            // krots[rand].hitSound.src = "audio/mishka.mp3"
+            // krots[rand].hitSound.play()
             krots[rand].hide(randTime)
         }
     }, speed);
