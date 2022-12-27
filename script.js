@@ -1,7 +1,5 @@
 class Krot {
     constructor(w, h) {
-        // this._x = x
-        // this._y = y
         this.w = w
         this.h = h
         this.mode = "W"
@@ -22,11 +20,8 @@ class Krot {
         newKrot.classProt = this
         let cl = this
         newKrot.classList.add(this.style.className)
-        // newKrot.style.top = this._y+"px"
-        // newKrot.style.left = this._x+"px"
         newKrot.style.width = this.w + "px"
         newKrot.style.height = this.h + "px"
-        // newKrot.style.border= "1px solid black"
         newKrot.style.backgroundImage = "url(" + this.style.img + ")"
         newKrot.addEventListener("click", function () {
             if (cl.mode == "A") {
@@ -81,8 +76,8 @@ let size = 5
 let speed = 200
 let score = 0
 let Timeleft = 60
-let w = 50,
-    h = 50,
+let w = 100,
+    h = 100,
     margins = 5
 
 
